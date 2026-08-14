@@ -17,6 +17,8 @@ After Metacell finishes, check for any errors
 
 Sometimes, a size will be skipped. This can be fixed by...
 
+If it just kinda stops on a size... Let me know.
+
 ## Running mcRigor
 Use get_cell_membership.ipynb to generate cell membership files for all the metacell sizes
 
@@ -28,3 +30,6 @@ Run the following command to submit run_mcrigor.sh as a job on the HPC
 Open mcrigor_visualization.Rmd and follow instructions
 
 ## Comparing metacell vs. single-cell
+- metacell vs. single-cell cell type proportions
+- using singleR to annotate original single-cell with metacell
+- using singleR to annotate new single-cell with original single cell and metacell

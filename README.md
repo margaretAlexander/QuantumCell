@@ -9,7 +9,7 @@ Since we're running metacell with multiple target sizes, I would recommend using
 
 Run the following command to submit run_metacell.sh as a job on the HPC
 
-'./sender_metacell.sh organ min_metacell_size max_metacell_size interval_size'
+`./sender_metacell.sh organ min_metacell_size max_metacell_size interval_size`
 
 Note: Metacell will throw an error is min_metacell_size is less than 12. I usually just go with 20
 
@@ -22,7 +22,7 @@ Use get_cell_membership.ipynb to generate cell membership files for all the meta
 
 Run the following command to submit run_mcrigor.sh as a job on the HPC
 
-'./sender_mcrigor.sh organ'
+`./sender_mcrigor.sh organ`
 
 ## Visualizing Metacell and mcRigor results
 Open mcrigor_visualization.Rmd and follow instructions

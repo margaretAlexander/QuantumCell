@@ -10,9 +10,17 @@ library(mcRigor)
 args <- commandArgs(trailingOnly = TRUE)
 
 dataset_name = args[1]
+filter_lateral = args[2]
+
 quantumcell_dir <- "/research_jude/rgs01_jude/groups/plummgrp/home/common/Maggie/QuantumCell/"
 sc_input_dir <- paste0(quantumcell_dir, "metacell_clean/")
-mc_input_dir <- paste0(quantumcell_dir, dataset_name, "_metacells/")
+
+if (filter_lateral) {
+  mc_input_dir <- paste0(quantumcell_dir, dataset_name, "_metacells/one_pass")
+  }
+else {
+  mc_input_dir <- paste0(quantumcell_dir, dataset_name, "_metacells/with_lateral")
+}
 
 # load single cell data
 tryCatch(
@@ -39,7 +47,7 @@ tryCatch(
 )
 
 # load metacell partitions
-cell_membership_all <- read.csv(file = paste0(mc_input_dir, "with_lateral/cell_membership.csv"), check.names = F, row.names = 1)
+cell_membership_all <- read.csv(file = paste0(mc_input_dir, "/cell_membership.csv"), check.names = F, row.names = 1)
                                   
 while (!file.exists(paste0(mc_input_dir, "opt_res.rds"))){
     # optimization of hyperparameters

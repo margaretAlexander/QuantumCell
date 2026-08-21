@@ -17,11 +17,11 @@ Here's an example using the Human Breast Cell Atlas:
 
 `./sender_metacell.sh hbca 20 200 10`
 
-After Metacell finishes, check for any errors
+After Metacell finishes, check for any errors in metacell_organ.err and metacell_organ.out
 
 If one of the sizes gets skipped (i.e. no metacell object or cell membership .csv got generated for that size), try lowering select_min_genes in mc.pl.divide_and_conquer_pipeline.
 
-If it just kinda stops on a size... Let me know.
+If it just kinda stops on a size without ever finishing... Let me know.
 
 ## Running mcRigor
 Use get_cell_membership.ipynb to generate cell membership files for all the metacell sizes
@@ -33,6 +33,8 @@ Run the following command to submit run_mcrigor.sh as a job on the HPC
 Example with HBCA:
 
 `./sender_mcrigor.sh hbca`
+
+Check for errors in mcrigor_organ.err and mcrigor_organ.out
 
 ## Visualizing Metacell and mcRigor results
 Open mcrigor_visualization.Rmd and follow instructions

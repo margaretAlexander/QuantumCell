@@ -9,7 +9,7 @@ Since we're running metacell with multiple target sizes, I would recommend using
 
 Run the following command to submit run_metacell.sh as a job on the HPC
 
-`./sender_metacell.sh organ min_metacell_size max_metacell_size interval_size`
+`./sender_metacell.sh organ min_metacell_size max_metacell_size interval_size filter_lateral`
 
 Note: Metacell will throw an error is min_metacell_size is less than 12. I usually just go with 20
 

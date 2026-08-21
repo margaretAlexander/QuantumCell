@@ -15,7 +15,7 @@ Note: Metacell will throw an error is min_metacell_size is less than 12. I usual
 
 After Metacell finishes, check for any errors
 
-Sometimes, a size will be skipped. This can be fixed by...
+If one of the sizes gets skipped (i.e. no metacell object or cell membership .csv got generated for that size), this can be fixed by lowering select_min_genes in mc.pl.divide_and_conquer_pipeline.
 
 If it just kinda stops on a size... Let me know.
 

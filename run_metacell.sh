@@ -16,7 +16,13 @@ PIP_TARGET=/home/malexand/.conda/envs/cellxgene/lib/python3.9/site-packages/
 unset PYTHONPATH
 
 sizes=( {min_size..max_size..interval} )
-for i in "${sizes[@]}"; do
-	python metacell_one_pass.py --dataset_name input --metacell_size $i
-done
 
+if [[ -n $filter_lateral ]]; then
+	for i in "${sizes[@]}"; do
+		python metacell_one_pass.py --dataset_name input --metacell_size $i --filter_lateral
+	done
+else
+	for i in "${sizes[@]}"; do
+		python metacell_one_pass.py --dataset_name input --metacell_size $i
+	done
+fi

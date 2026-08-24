@@ -11,8 +11,8 @@
 
 module load conda3/202402
 module unload conda3/201903
-conda activate cellxgene
-PIP_TARGET=/home/malexand/.conda/envs/cellxgene/lib/python3.9/site-packages/
+conda activate metacell
+PIP_TARGET=/home/malexand/.conda/envs/metacell/lib/python3.9/site-packages/ # change to your metacell environment's path
 unset PYTHONPATH
 
 sizes=( {min_size..max_size..interval} )

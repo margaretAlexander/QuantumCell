@@ -14,7 +14,7 @@ export LD_LIBRARY_PATH="/hpcf/authorized_apps/rhel8_apps/R/4.3.1/install/lib64/R
 
 Rscript mcrigor.R input
 
-if [ -z filter_lateral ]; then
+if [ -z "$filter_lateral" ]; then
 	Rscript mcrigor.R input --filter_lateral
 else
 	Rscript mcrigor.R input

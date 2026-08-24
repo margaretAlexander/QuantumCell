@@ -13,3 +13,9 @@ module load HDF5/1.14.3-gompi-2023b
 export LD_LIBRARY_PATH="/hpcf/authorized_apps/rhel8_apps/R/4.3.1/install/lib64/R/lib:/hpcf/authorized_apps/rhel8_apps/easybuild/software/GCCcore/13.2.0/lib64:$EBROOTHDF5/lib:$LD_LIBRARY_PATH"
 
 Rscript mcrigor.R input
+
+if [ -z filter_lateral ]; then
+	Rscript mcrigor.R input --filter_lateral
+else
+	Rscript mcrigor.R input
+fi

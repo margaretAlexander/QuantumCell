@@ -17,7 +17,7 @@ unset PYTHONPATH
 
 sizes=( {min_size..max_size..interval} )
 
-if [ -z "filter_lateral" ]; then
+if [ -z "$filter_lateral" ]; then
 	for i in "${sizes[@]}"; do
 		python metacell_one_pass.py --dataset_name input --metacell_size $i --filter_lateral
 	done

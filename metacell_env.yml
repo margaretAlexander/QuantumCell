@@ -32,4 +32,3 @@ dependencies:
   - xorg-libxau==1.0.12=h9b100fa_0
   - expat==2.7.1=h6a678d5_0
   - libgomp==11.2.0=h1234567_1
-prefix: /home/malexand/.conda/envs/cellxgene

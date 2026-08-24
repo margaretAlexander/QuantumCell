@@ -1,4 +1,6 @@
 #!/bin/bash
-input=$(echo $1) # dataset to run mcrigor on (must have ran metacell already and generated cell membership file)
+input=$(echo $1) # dataset to run mcrigor on (must have already run metacell at more than one size)
+filter_lateral=$(echo $2) # whether lateral genes were filtered in metacell
 
-sed "s/input/$input/g" < run_mcrigor.sh | bsub
+sed -e "s/input/$input/g" \
+    -e "s/filter_lateral/$filter_lateral/g" < run_mcrigor.sh | bsub

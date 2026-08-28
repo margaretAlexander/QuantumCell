@@ -25,7 +25,7 @@ If one of the sizes gets skipped (i.e. no metacell object or cell membership .cs
 
 If it just kinda stops on a size without ever finishing... Let me know.
 
-## Running mcRigor
+## Getting single-cell membership file
 Run the following to get "cell_membership.csv". This will contain which single cells were assigned to which metacells for each metacell size
 
 `python get_cell_membership.py dataset --filter_lateral`
@@ -33,6 +33,11 @@ Run the following to get "cell_membership.csv". This will contain which single c
 Example with HBCA without filtering lateral:
 
 `python get_cell_membership.py hbca`
+
+## Running mcRigor
+Install mcRigor using:
+
+`install.packages("path/to/mcRigor", repos = NULL, type = "source")`
 
 Run the following command to submit run_mcrigor.sh as a job on the HPC
 

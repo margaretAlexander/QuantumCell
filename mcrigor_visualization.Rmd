@@ -1,5 +1,5 @@
 ---
-title: "mcrigor"
+title: "metacell and mcrigor visualization"
 output: html_document
 date: "2025-12-03"
 ---
@@ -8,25 +8,18 @@ date: "2025-12-03"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# trying mcrigor on different metacells under different conditions
 ```{r}
-#tools::R_user_dir("mcRigor", which="cache")
 library(mcRigor)
 library(Seurat)
-library(SeuratDisk)
-library(SeuratData)
 library(ggplot2)
-library(qs)
 library(Matrix)
 library(dplyr)
-library(SummarizedExperiment)
 library(BPCells)
-#library(DropletUtils)
 ```
 
 ```{r}
-# set constants
-dataset_name = 'bm'
+# set constants (change as needed)
+dataset_name = 'hbca'
 sc_input_dir <- '/media/ResearchHome/plummgrp/home/common/Maggie/QuantumCell/metacell_clean/'
 mc_input_dir <- paste0('/media/ResearchHome/plummgrp/home/common/Maggie/QuantumCell/', dataset_name, '_metacells/')
 ```
@@ -37,7 +30,7 @@ sc_seurat <- schard::h5ad2seurat(paste0(sc_input_dir,dataset_name, '.clean.h5ad'
 ```
 
 ```{r}
-# for larger objects, use BPCells
+# for larger objects, use BPCells (only should apply to heart and retina)
 if (file.exists(paste0(sc_input_dir, dataset_name, '.clean_BP'))) {
   data <- open_matrix_anndata_hdf5(paste0(sc_input_dir, dataset_name, '.clean.h5ad'))
   write_matrix_dir(
@@ -58,24 +51,25 @@ head(cell_membership_all)
 ```
 
 ```{r}
+# load results for mcRigor
 optimize_res <- readRDS(paste0(mc_input_dir, "opt_res.rds"))
 optimize_res
 ```
 
 ```{r}
+# get metacell object identified by mcRigor
 opt_metacell = optimize_res$opt_metacell
 opt_metacell
 ```
 
 ```{r}
-opt_metacell_tuned = subset(opt_metacell, mcRigor == 'trustworthy')
-
+# get single-cell membership from optimal metacell object
 sc_membership = opt_metacell@misc$cell_membership$Metacell
 names(sc_membership) = rownames(opt_metacell@misc$cell_membership)
 ```
 
 ```{r}
-# vizualize
+# vizualize dubious and trustworthy metacells
 plot = mcRigor_projection(obj_singlecell = sc_seurat, 
                           sc_membership = sc_membership,
                           color_field = 'cell_type',
@@ -88,14 +82,14 @@ plot = mcRigor_projection(obj_singlecell = sc_seurat,
 ```
 
 ```{r}
-# plot single cell to metacell proportions (with and without dubious)
+# get metadata for single-cell, metacell, and tuned metacell
 meta_sc <- sc_seurat@meta.data
 meta_mc <- opt_metacell@meta.data
 meta_mc_tuned <- opt_metacell_tuned@meta.data
 ```
 
 ```{r}
-# plot single cell and metacell umaps (with and without dubious)
+# plot single cell and metacell UMAPs (with and without dubious)
 # get umap and return processed object
 get_umap <- function(obj){
   obj <- FindVariableFeatures(obj)
@@ -110,36 +104,40 @@ get_umap <- function(obj){
 ```
 
 ```{r}
+# UMAP for single-cell
+# change 'reduction' parameter as needed (should already be available)
 p1 <- DimPlot(sc_seurat, reduction="XscVIumap_", group.by = "cell_type", label = TRUE, label.size = 2) +
   theme(legend.text = element_text(size = 6))
-ggsave(paste0(mc_input_dir, "sc_umap.png"), plot = p1)
 ```
 
 ```{r}
+# get UMAP for opt_metacell and opt_metacell_tuned
 opt_metacell <- get_umap(opt_metacell)
 opt_metacell_tuned <- get_umap(opt_metacell_tuned)
 
+# plot UMAPs
 p2 <- DimPlot(opt_metacell, reduction="umap", group.by = "cell_type", label = TRUE, label.size = 2) +
   theme(legend.text = element_text(size = 6))
-ggsave(paste0(mc_input_dir, "mc_umap.png"), plot = p2)
 
 p3 <- DimPlot(opt_metacell_tuned, reduction="umap", group.by = "cell_type", label = TRUE, label.size = 2) +
   theme(legend.text = element_text(size = 6))
-ggsave(paste0(mc_input_dir, "mc_tuned_umap.png"), plot = p3)
 ```
 
 ```{r}
-# plot cell type proportions 
+# get cell type proportions
+# single-cell
 sc_prop <- meta_sc %>%
   group_by(cell_type) %>%
   summarise(n=n())%>%
   mutate(percent = (n / sum(n)), cumsum = cumsum(percent), orig.ident = 'Single Cell')
 
+# metacell
 mc_prop <- meta_mc %>%
   group_by(cell_type) %>%
   summarise(n=n())%>%
   mutate(percent = (n / sum(n)), cumsum = cumsum(percent), orig.ident = 'Metacell')
 
+# metacell w/o dubious
 mc_tuned_prop <- meta_mc_tuned %>%
   group_by(cell_type) %>%
   summarise(n=n())%>%
@@ -147,26 +145,24 @@ mc_tuned_prop <- meta_mc_tuned %>%
 ```
 
 ```{r}
+# plot cell type proportions
 p4 <- ggplot(sc_prop, aes(x=orig.ident, y=percent, fill=cell_type)) +
   scale_y_continuous(labels = scales::percent) +
   labs ( y = "Percentage") +
   geom_bar(position = 'fill',color = "black", stat="identity") +
   guides(fill=guide_legend(reverse=T))
-ggsave(paste0(mc_input_dir, "sc_prop.png"), plot = p4)
 
 p5 <- ggplot(mc_prop, aes(x=orig.ident, y=percent, fill=cell_type)) +
   scale_y_continuous(labels = scales::percent) +
   labs ( y = "Percentage") +
   geom_bar(position = 'fill',color = "black", stat="identity") +
   guides(fill=guide_legend(reverse=T))
-ggsave(paste0(mc_input_dir, "mc_prop.png"), plot = p5)
 
 p6 <- ggplot(mc_tuned_prop, aes(x=orig.ident, y=percent, fill=cell_type)) +
   scale_y_continuous(labels = scales::percent) +
   labs ( y = "Percentage") +
   geom_bar(position = 'fill',color = "black", stat="identity") +
   guides(fill=guide_legend(reverse=T))
-ggsave(paste0(mc_input_dir, "mc_tuned_prop.png"), plot = p6)
 ```
 
 ```{r}
@@ -182,30 +178,7 @@ p7 <- ggplot(dub_rate, aes(x=cell_type, y=percent, fill=mcRigor)) +
   geom_bar(position = 'fill',color = "black", stat="identity") +
   guides(fill=guide_legend(reverse=T)) +
   coord_flip()
-ggsave(paste0(mc_input_dir, "dub_rate.png"), plot = p7)
+
+p7
 ```
-
-```{r}
-# mcrigor 2 step
-step2_res <- readRDS(paste0(mc_input_dir, "2step_res.rds"))
-```
-
-```{r}
-opt_metacell_2 <- step2_res$obj_metacell_final
-opt_metacell_withsc <- step2_res$obj_metacell_final_withsc
-
-step2_res$plot
-step2_res$plot_sc
-opt_metacell_2
-opt_metacell_withsc
-```
-
-```{r}
-step2_res$mmc_res_twostep$optim_plot
-```
-
-```{r}
-step2_res$mmc_res_twostep$scores
-```
-
 

@@ -1,6 +1,15 @@
 # Generating and Evaluating Metacell Atlases
 All single-cell datasets are stored in /media/ResearchHome/plummgrp/home/common/Maggie/QuantumCell/cellxgene
 
+## Setting Up Metacell Environment
+If you are working in the lab server, use:
+
+`conda activate metacell_MA`
+
+If you are working on the HPC, you will have to make your own environment using:
+
+`conda env create -f metacell_env.yml`
+
 ## Cleaning data
 Open clean_data.ipynb and follow instructions
 

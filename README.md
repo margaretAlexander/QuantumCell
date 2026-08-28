@@ -60,8 +60,3 @@ Check for errors in mcrigor_organ.err and mcrigor_organ.out
 
 ## Visualizing Metacell and mcRigor results
 Open mcrigor_visualization.Rmd and follow instructions
-
-## Comparing metacell vs. single-cell
-- metacell vs. single-cell cell type proportions
-- using singleR to annotate original single-cell with metacell
-- using singleR to annotate new single-cell with original single cell and metacell

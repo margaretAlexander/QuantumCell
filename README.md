@@ -11,6 +11,12 @@ Run the following command to submit run_metacell.sh as a job on the HPC
 
 `./sender_metacell.sh dataset min_metacell_size max_metacell_size interval_size filter_lateral`
 
+Only add filter_lateral if filtering lateral genes.
+
+Here's an example with the Human Breast Cell Atlas (HBCA) without filtering lateral genes:
+
+`./sender_metacell.sh hbca 20 100 10`
+
 Note: Metacell will throw an error is min_metacell_size is less than 12. I usually just go with 20
 
 After Metacell finishes, check for any errors in metacell_organ.err and metacell_organ.out
@@ -24,11 +30,15 @@ Run the following to get "cell_membership.csv". This will contain which single c
 
 `python get_cell_membership.py dataset --filter_lateral`
 
+Example with HBCA without filtering lateral:
+
+`python get_cell_membership.py hbca`
+
 Run the following command to submit run_mcrigor.sh as a job on the HPC
 
 `./sender_mcrigor.sh organ filter_lateral`
 
-Example with HBCA:
+Example with HBCA without filtering lateral:
 
 `./sender_mcrigor.sh hbca`
 

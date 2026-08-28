@@ -24,7 +24,7 @@ Only add filter_lateral if filtering lateral genes.
 
 Here's an example with the Human Breast Cell Atlas (HBCA) without filtering lateral genes:
 
-`./sender_metacell.sh hbca 20 100 10`
+`./sender_metacell.sh hbca 100 200 10`
 
 Note: Metacell will throw an error is min_metacell_size is less than 12. I usually just go with 20
 

@@ -46,7 +46,7 @@ Example with HBCA without filtering lateral:
 ## Running mcRigor
 Install mcRigor using:
 
-`install.packages("path/to/mcRigor", repos = NULL, type = "source")`
+`install.packages("/media/ResearchHome/plummgrp/home/common/Maggie/QuantumCell/mcRigor", repos = NULL, type = "source")`
 
 Run the following command to submit run_mcrigor.sh as a job on the HPC
 

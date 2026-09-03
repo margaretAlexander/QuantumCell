@@ -44,9 +44,13 @@ Example with HBCA without filtering lateral:
 `python get_cell_membership.py hbca`
 
 ## Running mcRigor
-Install mcRigor using:
+On the HPC, install R 4.3.1
 
-`install.packages("/media/ResearchHome/plummgrp/home/common/Maggie/QuantumCell/mcRigor", repos = NULL, type = "source")`
+`module load R/4.3.1`
+
+Open R on HPC and install mcRigor using:
+
+`install.packages("/research_jude/rgs01_jude/groups/plummgrp/home/common/Maggie/QuantumCell/mcRigor", repos = NULL, type = "source")`
 
 Run the following command to submit run_mcrigor.sh as a job on the HPC
 
@@ -59,4 +63,8 @@ Example with HBCA without filtering lateral:
 Check for errors in mcrigor_organ.err and mcrigor_organ.out
 
 ## Visualizing Metacell and mcRigor results
-Open mcrigor_visualization.Rmd and follow instructions
+Open mcrigor_visualization.Rmd and follow instructions. I use NoMachine for this.
+
+If you need to install mcRigor on lab server:
+
+`install.packages("/media/ResearchHome/plummgrp/home/common/Maggie//QuantumCell/mcRigor", repos = NULL, type = "source")`

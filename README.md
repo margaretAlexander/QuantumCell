@@ -22,7 +22,7 @@ Run the following command to submit run_metacell.sh as a job on the HPC
 
 Only add filter_lateral if filtering lateral genes.
 
-Here's an example with the Human Breast Cell Atlas (HBCA) without filtering lateral genes:
+Here's an example with the Human Breast Cell Atlas (HBCA) for metacell sizes 100, 110, 120,... 200 without filtering lateral genes:
 
 `./sender_metacell.sh hbca 100 200 10`
 

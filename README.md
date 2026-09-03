@@ -50,7 +50,7 @@ On the HPC, install R 4.3.1
 
 Open R on HPC and install mcRigor using:
 
-`install.packages("/research_jude/rgs01_jude/groups/plummgrp/home/common/Maggie/QuantumCell/mcRigor", repos = NULL, type = "source")`
+`remotes::install_local("/research_jude/rgs01_jude/groups/plummgrp/home/common/Maggie/QuantumCell/mcRigor", dependencies = TRUE)`
 
 Run the following command to submit run_mcrigor.sh as a job on the HPC
 
@@ -67,4 +67,4 @@ Open mcrigor_visualization.Rmd and follow instructions. I use NoMachine for this
 
 If you need to install mcRigor on lab server:
 
-`install.packages("/media/ResearchHome/plummgrp/home/common/Maggie//QuantumCell/mcRigor", repos = NULL, type = "source")`
+`remotes::install_local("/media/ResearchHome/plummgrp/home/common/Maggie//QuantumCell/mcRigor", dependencies = TRUE)`

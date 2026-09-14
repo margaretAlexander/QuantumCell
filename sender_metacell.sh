@@ -9,4 +9,4 @@ sed -e "s/input/$input/g" \
     -e "s/min_size/$min_size/g" \
     -e "s/max_size/$max_size/g" \
     -e "s/interval/$interval/g" \
-    -e "s/filter_lateral/$filter_lateral/g" < run_metacells_test.sh | bsub
+    -e "s/filter_lateral/$filter_lateral/g" < run_metacell.sh | bsub
